@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezequiel Molina | Senior Economist</title>
+    <meta name="description" content="Senior Economist at the World Bank, specializing in AI in education, teacher professional development and educational technology.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --accent-3: #06b6d4;
+            --accent-4: #10b981;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow: 0 0 60px rgba(99, 102, 241, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .bg-animation::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+        @keyframes bgMove { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(2%, 2%); } }
+        .grid-pattern {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px); background: rgba(10, 10, 15, 0.8);
+            border-bottom: 1px solid var(--border-color); transition: all 0.3s ease;
+        }
+        nav.scrolled { padding: 1rem 4rem; background: rgba(10, 10, 15, 0.95); }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .lang-switch { display: flex; gap: 0.5rem; }
+        .lang-btn { padding: 0.4rem 0.8rem; background: transparent; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; }
+        .lang-btn.active, .lang-btn:hover { background: var(--accent-1); border-color: var(--accent-1); color: white; }
+        .menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+        .menu-btn span { width: 25px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 8rem 4rem 4rem; }
+        .hero-content { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-text { animation: fadeInUp 1s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        h1 { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+        h1 .gradient-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; }
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background: var(--gradient-1); color: white; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5); }
+        .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-1); }
+        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; animation: fadeInUp 1s ease 0.3s both; }
+        .hero-card { width: 100%; max-width: 450px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 2rem; backdrop-filter: blur(20px); position: relative; overflow: hidden; }
+        .hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-1); }
+        .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .avatar { width: 100px; height: 100px; border-radius: 20px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: white; overflow: hidden; position: relative; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+        .card-info h3 { font-size: 1.25rem; font-weight: 600; }
+        .card-info p { color: var(--text-secondary); font-size: 0.9rem; }
+        .card-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        .stat { text-align: center; padding: 1rem; background: rgba(255, 255, 255, 0.02); border-radius: 12px; border: 1px solid var(--border-color); }
+        .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem; }
+        .floating-badge { position: absolute; padding: 0.75rem 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; animation: float 3s ease-in-out infinite; backdrop-filter: blur(10px); }
+        .floating-badge.top-right { top: -20px; right: -30px; }
+        .floating-badge.bottom-left { bottom: 40px; left: -40px; animation-delay: 1s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        section { padding: 6rem 4rem; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-label { display: inline-block; padding: 0.5rem 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.85rem; color: var(--accent-1); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .section-desc { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .program-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-1); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover { transform: translateY(-8px); box-shadow: var(--glow); }
+        .program-image { width: 100%; height: 180px; border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem; position: relative; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .program-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .program-card:hover .program-image img { transform: scale(1.05); }
+        .program-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .program-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .program-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .program-stat { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+        .program-stat svg { width: 18px; height: 18px; stroke: var(--accent-1); }
+        .program-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-1); font-size: 0.9rem; margin-top: 1rem; text-decoration: none; transition: all 0.3s ease; }
+        .program-link:hover { color: var(--accent-2); gap: 0.75rem; }
+        .pub-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .pub-tab { padding: 0.75rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; }
+        .pub-tab:hover, .pub-tab.active { background: rgba(99, 102, 241, 0.1); border-color: var(--accent-1); color: var(--accent-1); }
+        .pub-tab.active { background: var(--accent-1); color: white; }
+        .pub-content { display: none; }
+        .pub-content.active { display: block; }
+        .pub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .pub-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; transition: all 0.3s ease; display: flex; flex-direction: column; }
+        .pub-card:hover { transform: translateY(-5px); border-color: var(--accent-1); box-shadow: var(--glow); }
+        .pub-card a.pub-link-wrap { color: inherit; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
+        .pub-type { display: inline-block; padding: 0.35rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); margin-bottom: 1rem; width: fit-content; }
+        .pub-type.ai { background: rgba(6, 182, 212, 0.1); color: var(--accent-3); }
+        .pub-type.journal { background: rgba(139, 92, 246, 0.1); color: var(--accent-2); }
+        .pub-type.flagship { background: rgba(16, 185, 129, 0.1); color: var(--accent-4); }
+        .pub-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; flex-grow: 1; line-height: 1.4; }
+        .pub-authors { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .pub-meta { display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+        .pub-downloads { display: flex; align-items: center; gap: 0.35rem; color: var(--accent-3); }
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .blog-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; transition: all 0.3s ease; text-decoration: none; color: inherit; }
+        .blog-card:hover { transform: translateY(-8px); border-color: var(--accent-1); box-shadow: var(--glow); }
+        .blog-image { height: 160px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); position: relative; overflow: hidden; }
+        .blog-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .blog-card:hover .blog-image img { transform: scale(1.05); }
+        .blog-content { padding: 1.5rem; }
+        .blog-tag { display: inline-block; padding: 0.35rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); margin-bottom: 0.75rem; }
+        .blog-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.4; }
+        .blog-excerpt { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .blog-meta { display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.85rem; }
+        .blog-cta { text-align: center; margin-top: 3rem; }
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gradient-1); }
+        .timeline-item { position: relative; padding-left: 3rem; padding-bottom: 3rem; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-dot { position: absolute; left: -8px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-primary); border: 3px solid var(--accent-1); box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+        .timeline-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; }
+        .timeline-content:hover { border-color: var(--accent-1); transform: translateX(10px); }
+        .timeline-date { font-size: 0.85rem; color: var(--accent-1); margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .timeline-org { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.75rem; }
+        .timeline-desc { color: var(--text-secondary); font-size: 0.9rem; }
+        .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .edu-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; display: flex; gap: 1.5rem; transition: all 0.3s ease; }
+        .edu-card:hover { border-color: var(--accent-1); transform: translateX(10px); }
+        .edu-icon { width: 60px; height: 60px; background: rgba(99, 102, 241, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .edu-icon svg { width: 28px; height: 28px; stroke: var(--accent-1); }
+        .edu-degree { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .edu-school { color: var(--accent-1); font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .edu-year { color: var(--text-secondary); font-size: 0.85rem; }
+        .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .contact-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.3s ease; text-decoration: none; color: inherit; }
+        .contact-card:hover { transform: translateY(-8px); border-color: var(--accent-1); box-shadow: var(--glow); }
+        .contact-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .contact-card:hover .contact-icon { background: var(--gradient-1); }
+        .contact-icon svg { width: 28px; height: 28px; stroke: var(--accent-1); transition: all 0.3s ease; }
+        .contact-card:hover .contact-icon svg { stroke: white; }
+        .contact-label { font-weight: 600; margin-bottom: 0.25rem; }
+        .contact-value { color: var(--text-secondary); font-size: 0.9rem; }
+        footer { text-align: center; padding: 3rem 4rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
+        footer a { color: var(--accent-1); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+        @media (max-width: 1200px) {
+            .programs-grid { grid-template-columns: repeat(2, 1fr); }
+            .pub-grid { grid-template-columns: 1fr; }
+            .blog-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 900px) {
+            nav { padding: 1rem 2rem; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10, 10, 15, 0.98); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .menu-btn { display: flex; }
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            h1 { font-size: 2.5rem; }
+            .hero-subtitle { margin: 0 auto 2rem; }
+            .hero-cta { justify-content: center; }
+            section { padding: 4rem 2rem; }
+            .programs-grid, .pub-grid, .edu-grid, .contact-grid, .blog-grid { grid-template-columns: 1fr; }
+            .featured-grid { grid-template-columns: 1fr !important; }
+            .floating-badge { display: none; }
+            h2 { font-size: 2rem; }
+        }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-pattern"></div>
+
+    <nav id="navbar">
+        <div class="logo">EM</div>
+        <div class="nav-right">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#programs" data-en="Programs" data-es="Programas">Programs</a></li>
+                <li><a href="#publications" data-en="Publications" data-es="Publicaciones">Publications</a></li>
+                <li><a href="#blogs" data-en="Blogs" data-es="Blogs">Blogs</a></li>
+                <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a></li>
+                <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
+        </div>
+        <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1><span class="gradient-text">Ezequiel</span><br>Molina</h1>
+                <p class="hero-subtitle" data-en="Helping countries improve teaching quality and leverage AI to tackle the global learning crisis. Creator of Teach (used in 40+ countries) and winner of the 2025 World Bank Presidential Innovation Award." data-es="Ayudando a paises a mejorar la calidad docente y aprovechar la IA para enfrentar la crisis global de aprendizaje. Creador de Teach (usado en 40+ paises) y ganador del Premio Presidencial de Innovacion del Banco Mundial 2025.">Helping countries improve teaching quality and leverage AI to tackle the global learning crisis. Creator of Teach (used in 40+ countries) and winner of the 2025 World Bank Presidential Innovation Award.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span data-en="Get in Touch" data-es="Contactar">Get in Touch</span>
+                    </a>
+                    <a href="#publications" class="btn btn-secondary" data-en="View Publications" data-es="Ver Publicaciones">View Publications</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-header">
+                        <div class="avatar">
+                            <img src="https://worldbank.scene7.com/is/image/worldbankprod/220-head-shotEzequiel?wid=200&hei=200&fmt=webp" alt="Ezequiel Molina" onerror="this.style.display='none'">EM
+                        </div>
+                        <div class="card-info">
+                            <h3>Ezequiel Molina</h3>
+                            <p data-en="Senior Economist | Education Global Practice" data-es="Economista Senior | Practica Global de Educacion">Senior Economist | Education Global Practice</p>
+                        </div>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                        <strong style="color: var(--text-primary);">The World Bank</strong><br>
+                        <span data-en="Education Global Practice | LAC Region" data-es="Practica Global de Educacion | Region LAC">Education Global Practice | LAC Region</span><br>Lima, Peru
+                    </div>
+                    <div class="card-stats">
+                        <div class="stat"><div class="stat-value">40+</div><div class="stat-label" data-en="Countries using Teach" data-es="Paises usando Teach">Countries using Teach</div></div>
+                        <div class="stat"><div class="stat-value">180K+</div><div class="stat-label" data-en="Teachers reached" data-es="Docentes alcanzados">Teachers reached</div></div>
+                        <div class="stat"><div class="stat-value">100K+</div><div class="stat-label" data-en="Publication downloads" data-es="Descargas de publicaciones">Publication downloads</div></div>
+                    </div>
+                </div>
+                <div class="floating-badge top-right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Princeton PhD
+                </div>
+                <div class="floating-badge bottom-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <span data-en="Global Impact" data-es="Impacto Global">Global Impact</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="featured" style="padding-top: 2rem;">
+        <div class="featured-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto;">
+            <div class="featured-card animate-on-scroll" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem;">
+                <div style="width: 60px; height: 60px; background: var(--gradient-1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--accent-1); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem;" data-en="2025 Award" data-es="Premio 2025">2025 Award</div>
+                    <div style="font-weight: 600; font-size: 1rem;" data-en="World Bank Presidential Innovation Award" data-es="Premio Presidencial de Innovacion del Banco Mundial">World Bank Presidential Innovation Award</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="For 'LearnAI for Jobs' - 1 of 7 selected Bank-wide" data-es="Por 'LearnAI for Jobs' - 1 de 7 seleccionados a nivel del Banco">For "LearnAI for Jobs" - 1 of 7 selected Bank-wide</div>
+                </div>
+            </div>
+            <div class="featured-card animate-on-scroll" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem;">
+                <div style="width: 60px; height: 60px; background: rgba(6, 182, 212, 0.15); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--accent-3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem;" data-en="Weekly Newsletter" data-es="Boletin Semanal">Weekly Newsletter</div>
+                    <div style="font-weight: 600; font-size: 1rem;">AI Tuesday</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="Reaching 10,000+ World Bank staff weekly across all regions" data-es="Llegando a mas de 10,000 funcionarios del Banco Mundial semanalmente en todas las regiones">Reaching 10,000+ World Bank staff weekly across all regions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" style="padding-bottom: 2rem;">
+        <div class="animate-on-scroll" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; position: relative;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="1.5" style="opacity: 0.5; margin-bottom: 1rem;"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+            <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-secondary); font-style: italic;" data-en="Millions of children complete school without learning to read. This isn't the fault of teachers - it's a system failure. My work focuses on giving educators the tools, training, and technology they need to change this." data-es="Millones de ninos completan la escuela sin aprender a leer. Esto no es culpa de los docentes - es una falla del sistema. Mi trabajo se enfoca en dar a los educadores las herramientas, capacitacion y tecnologia que necesitan para cambiar esto.">Millions of children complete school without learning to read. This isn't the fault of teachers - it's a system failure. My work focuses on giving educators the tools, training, and technology they need to change this.</p>
+        </div>
+    </section>
+
+    <section id="programs">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Programs" data-es="Programas">Programs</span>
+            <h2 data-en="Tools & Initiatives" data-es="Herramientas e Iniciativas">Tools & Initiatives</h2>
+            <p class="section-desc" data-en="Open-source tools and programs developed with World Bank teams to support teacher development and education systems." data-es="Herramientas y programas de codigo abierto desarrollados con equipos del Banco Mundial para apoyar el desarrollo docente y los sistemas educativos.">Open-source tools and programs developed with World Bank teams to support teacher development and education systems.</p>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://worldbank.scene7.com/is/image/worldbankprod/School-and-Students?wid=780&hei=439&fmt=webp" alt="Classroom - Teach program">
+                </div>
+                <h3 class="program-name">Teach</h3>
+                <p class="program-desc" data-en="An open-source classroom observation tool to help measure and improve teaching quality in primary, early childhood, and secondary education." data-es="Una herramienta de observacion de aula de codigo abierto para ayudar a medir y mejorar la calidad de la ensenanza en educacion primaria, inicial y secundaria.">An open-source classroom observation tool to help measure and improve teaching quality in primary, early childhood, and secondary education.</p>
+                <div class="program-stats">
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg><span data-en="40+ Countries" data-es="40+ Paises">40+ Countries</span></div>
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-en="180K+ Teachers" data-es="180K+ Docentes">180K+ Teachers</span></div>
+                </div>
+                <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" class="program-link"><span data-en="Learn More" data-es="Saber Mas">Learn More</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://worldbank.scene7.com/is/image/worldbankprod/Pakistan-girl-classroom-breaking-barriers?wid=780&hei=439&fmt=webp" alt="Teacher coaching - Coach program">
+                </div>
+                <h3 class="program-name">Coach</h3>
+                <p class="program-desc" data-en="A framework for improving in-service teacher professional development, incorporating insights from behavioral science and adult learning research." data-es="Un marco para mejorar el desarrollo profesional docente en servicio, incorporando conocimientos de la ciencia del comportamiento y la investigacion sobre aprendizaje adulto.">A framework for improving in-service teacher professional development, incorporating insights from behavioral science and adult learning research.</p>
+                <div class="program-stats">
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg><span data-en="15+ Countries" data-es="15+ Paises">15+ Countries</span></div>
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>$7M</div>
+                </div>
+                <a href="https://www.worldbank.org/en/topic/education/brief/coach-helping-countries-accelerate-learning-by-improving-in-service-teacher-professional-development" target="_blank" class="program-link"><span data-en="Learn More" data-es="Saber Mas">Learn More</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://www.worldbank.org/content/dam/photos/780x439/2019/may-1/Perueducacionbasica.PNG" alt="Peru school - El Director LIBRE">
+                </div>
+                <h3 class="program-name">El Director LIBRE</h3>
+                <p class="program-desc" data-en="A practical AI training method to help school leaders reduce administrative tasks and dedicate more time to instructional leadership." data-es="Un metodo practico de capacitacion en IA para ayudar a los lideres escolares a reducir tareas administrativas y dedicar mas tiempo al liderazgo pedagogico.">A practical AI training method to help school leaders reduce administrative tasks and dedicate more time to instructional leadership.</p>
+                <div class="program-stats">
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-en="2,000+ Directors" data-es="2,000+ Directores">2,000+ Directors</span></div>
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-en="13K+ Downloads" data-es="13K+ Descargas">13K+ Downloads</span></div>
+                </div>
+                <a href="https://news.microsoft.com/source/latam/features/ai/world-bank-peru-teachers-copilot/?lang=en" target="_blank" class="program-link"><span data-en="Learn More" data-es="Saber Mas">Learn More</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Research" data-es="Investigacion">Research</span>
+            <h2 data-en="Publications" data-es="Publicaciones">Publications</h2>
+            <p class="section-desc" data-en="Peer-reviewed articles, policy briefs, and working papers on education, AI, and development." data-es="Articulos revisados por pares, notas de politica y documentos de trabajo sobre educacion, IA y desarrollo.">Peer-reviewed articles, policy briefs, and working papers on education, AI, and development.</p>
+        </div>
+        <div class="pub-tabs animate-on-scroll">
+            <button class="pub-tab active" data-tab="ai" data-en="AI & Digital Innovation" data-es="IA e Innovacion Digital">AI & Digital Innovation</button>
+            <button class="pub-tab" data-tab="journal" data-en="Peer-Reviewed Journals" data-es="Revistas Arbitradas">Peer-Reviewed Journals</button>
+            <button class="pub-tab" data-tab="flagship" data-en="Flagship Reports" data-es="Informes Emblematicos">Flagship Reports</button>
+        </div>
+        <div class="pub-content active" id="ai">
+            <div class="pub-grid">
+                <div class="pub-card animate-on-scroll"><a href="https://documents1.worldbank.org/curated/en/099734306182493324/pdf/IDU152823b13109c514ebd19c241a289470b6902.pdf" target="_blank" class="pub-link-wrap"><span class="pub-type ai">AI Brief</span><h4 class="pub-title">AI Revolution in Education: What You Need to Know</h4><p class="pub-authors">Molina, E., Cobo, C., Pineda, J., & Rovner, H.</p><div class="pub-meta"><span>2024 | World Bank</span><span class="pub-downloads"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>60,000+</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://openknowledge.worldbank.org/entities/publication/81b862e6-fdda-470a-a142-4a7c43e7b049" target="_blank" class="pub-link-wrap"><span class="pub-type ai">AI Brief</span><h4 class="pub-title">AI Revolution in Higher Education: What You Need to Know</h4><p class="pub-authors">Molina, E., & Medina, E.</p><div class="pub-meta"><span>2025 | World Bank</span><span class="pub-downloads"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>20,000+</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://documents1.worldbank.org/curated/en/099931007302544113/pdf/IDU-baaf52dd-348a-4f1c-a226-0f8d86c86094.pdf" target="_blank" class="pub-link-wrap"><span class="pub-type ai">Digital Innovation</span><h4 class="pub-title">Screen Time in Early Childhood Education: Balancing the Digital Scales</h4><p class="pub-authors">Molina, E.</p><div class="pub-meta"><span>2025 | World Bank</span><span class="pub-downloads"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>13,000+</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://documents1.worldbank.org/curated/en/099038209252435210/pdf/IDU-120af840-9d68-4ceb-b767-7c9bcf6bbc5d.pdf" target="_blank" class="pub-link-wrap"><span class="pub-type ai">Case Study</span><h4 class="pub-title">Ceibal: Transforming Education in Uruguay through Technology</h4><p class="pub-authors">Molina, E., Cobo, C., Rovner, H., Novali, A., & Pineda, J.</p><div class="pub-meta"><span>2024 | World Bank</span><span class="pub-downloads"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>3,500+</span></div></a></div>
+            </div>
+        </div>
+        <div class="pub-content" id="journal">
+            <div class="pub-grid">
+                <div class="pub-card animate-on-scroll"><a href="https://www.tandfonline.com/doi/full/10.1080/03057925.2024.2304293" target="_blank" class="pub-link-wrap"><span class="pub-type journal">Journal Article</span><h4 class="pub-title">Teaching for all? Measuring the quality of inclusive practices across eight countries</h4><p class="pub-authors">Molina, E., Carter, E., Luna Bazaldua, D., Pushparatnam, A., & Singal, N.</p><div class="pub-meta"><span>2024 | Compare</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://doi.org/10.14324/LRE.22.1.08" target="_blank" class="pub-link-wrap"><span class="pub-type journal">Journal Article</span><h4 class="pub-title">Evidence-based teaching: effective teaching practices in primary school classrooms</h4><p class="pub-authors">Carter, E., Molina, E., Pushparatnam, A., Rimm-Kaufman, S., Tsapali, M., & Wong, K.K.-Y.</p><div class="pub-meta"><span>2024 | London Review of Education</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://www.sciencedirect.com/science/article/pii/S0742051X20313627" target="_blank" class="pub-link-wrap"><span class="pub-type journal">Journal Article</span><h4 class="pub-title">Measuring the quality of teaching practices in primary schools: Assessing the validity of the Teach observation tool in Punjab, Pakistan</h4><p class="pub-authors">Molina, E., Fatima, S.F., Ho, A.D., Melo, C., Wilichowski, T.M., & Pushparatnam, A.</p><div class="pub-meta"><span>2020 | Teaching and Teacher Education</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://www.aeaweb.org/articles?id=10.1257/jep.31.4.185" target="_blank" class="pub-link-wrap"><span class="pub-type journal">Journal Article</span><h4 class="pub-title">Enrollment Without Learning: Teacher Effort, Knowledge, and Skill in Primary Schools in Africa</h4><p class="pub-authors">Bold, T., Filmer, D., Martin, G., Molina, E., et al.</p><div class="pub-meta"><span>2017 | Journal of Economic Perspectives</span></div></a></div>
+            </div>
+        </div>
+        <div class="pub-content" id="flagship">
+            <div class="pub-grid">
+                <div class="pub-card animate-on-scroll"><a href="https://openknowledge.worldbank.org/server/api/core/bitstreams/55a34cfb-3183-45ce-ba2c-24c22748d0b5/content" target="_blank" class="pub-link-wrap"><span class="pub-type flagship">Flagship Report</span><h4 class="pub-title">Making Teacher Policy Work</h4><p class="pub-authors" data-en="Principal Author - World Bank flagship on teacher compensation systems" data-es="Autor Principal - Informe emblematico del Banco Mundial sobre sistemas de compensacion docente">Principal Author - World Bank flagship on teacher compensation systems</p><div class="pub-meta"><span>2023 | World Bank</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://www.worldbank.org/en/publication/wdr2017" target="_blank" class="pub-link-wrap"><span class="pub-type flagship">World Development Report</span><h4 class="pub-title">WDR 2017: Governance and the Law - Chapter 2</h4><p class="pub-authors" data-en="Core Team Member - Authored chapter on political economy of policy failure" data-es="Miembro del Equipo Central - Autor del capitulo sobre economia politica del fracaso de politicas">Core Team Member - Authored chapter on political economy of policy failure</p><div class="pub-meta"><span>2017 | World Bank</span></div></a></div>
+                <div class="pub-card animate-on-scroll"><a href="https://documents1.worldbank.org/curated/en/872291641201520569/pdf/Teach-Primary-Observer-Manual.pdf" target="_blank" class="pub-link-wrap"><span class="pub-type flagship">Global Tool</span><h4 class="pub-title">Teach: Classroom Observation Tool - Observer Manual</h4><p class="pub-authors" data-en="Creator - Implementation guide for global deployment" data-es="Creador - Guia de implementacion para despliegue global">Creator - Implementation guide for global deployment</p><div class="pub-meta"><span>2019-Present | World Bank</span></div></a></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blogs">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Writing" data-es="Escritos">Writing</span>
+            <h2 data-en="Blogs & Articles" data-es="Blogs y Articulos">Blogs & Articles</h2>
+            <p class="section-desc" data-en="Selected posts from the World Bank Education Blog." data-es="Publicaciones seleccionadas del Blog de Educacion del Banco Mundial.">Selected posts from the World Bank Education Blog.</p>
+        </div>
+        <div class="blog-grid">
+            <a href="https://blogs.worldbank.org/en/education/teach-change-just-beginning" target="_blank" class="blog-card animate-on-scroll">
+                <div class="blog-image"><img src="https://worldbank.scene7.com/is/image/worldbankprod/20190528-Chad-Tremeau-081-1?wid=780&hei=439&fmt=webp" alt="Teach program"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Teach</span>
+                    <h4 class="blog-title">Teach... The change is just beginning</h4>
+                    <p class="blog-excerpt" data-en="How Teach is transforming classroom observation and teacher development globally." data-es="Como Teach esta transformando la observacion de aula y el desarrollo docente globalmente.">How Teach is transforming classroom observation and teacher development globally.</p>
+                    <div class="blog-meta"><span>World Bank Blog</span><span data-en="Read More" data-es="Leer Mas">Read More</span></div>
+                </div>
+            </a>
+            <a href="https://blogs.worldbank.org/en/education/making-classroom-observation-tools-better-new-study-teach" target="_blank" class="blog-card animate-on-scroll">
+                <div class="blog-image"><img src="https://www.worldbank.org/content/dam/photos/780x439/2017/aug/Cambodia-school.jpg" alt="Classroom"></div>
+                <div class="blog-content">
+                    <span class="blog-tag" data-en="Research" data-es="Investigacion">Research</span>
+                    <h4 class="blog-title" data-en="Making classroom observation tools better" data-es="Mejorando las herramientas de observacion de aula">Making classroom observation tools better</h4>
+                    <p class="blog-excerpt" data-en="New evidence on the validity and reliability of the Teach observation tool." data-es="Nueva evidencia sobre la validez y confiabilidad de la herramienta de observacion Teach.">New evidence on the validity and reliability of the Teach observation tool.</p>
+                    <div class="blog-meta"><span>World Bank Blog</span><span data-en="Read More" data-es="Leer Mas">Read More</span></div>
+                </div>
+            </a>
+            <a href="https://ceibal.edu.uy/institucional/articulos/ezequiel-molina/" target="_blank" class="blog-card animate-on-scroll">
+                <div class="blog-image"><img src="https://www.worldbank.org/content/dam/Worldbank/Feature%20Story/UY-ceibal-508x335.jpg" alt="Uruguay students with laptops - Ceibal"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">EdTech</span>
+                    <h4 class="blog-title" data-en="Ceibal: Digital Transformation in Uruguay" data-es="Ceibal: Transformacion Digital en Uruguay">Ceibal: Digital Transformation in Uruguay</h4>
+                    <p class="blog-excerpt" data-en="Featured article on Uruguay's pioneering educational technology initiative." data-es="Articulo destacado sobre la iniciativa pionera de tecnologia educativa de Uruguay.">Featured article on Uruguay's pioneering educational technology initiative.</p>
+                    <div class="blog-meta"><span>Ceibal</span><span data-en="Read More" data-es="Leer Mas">Read More</span></div>
+                </div>
+            </a>
+        </div>
+        <div class="blog-cta animate-on-scroll">
+            <a href="https://blogs.worldbank.org/en/team/e/ezequiel-molina" target="_blank" class="btn btn-secondary" data-en="View All Posts on World Bank Blog" data-es="Ver Todas las Publicaciones en el Blog del Banco Mundial">View All Posts on World Bank Blog</a>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Experience" data-es="Experiencia">Experience</span>
+            <h2 data-en="Professional Background" data-es="Trayectoria Profesional">Professional Background</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item animate-on-scroll"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date" data-en="Aug 2023 - Present" data-es="Ago 2023 - Presente">Aug 2023 - Present</div><div class="timeline-title" data-en="Senior Economist, LAC Region" data-es="Economista Senior, Region LAC">Senior Economist, LAC Region</div><div class="timeline-org">Education Global Practice | The World Bank</div><p class="timeline-desc" data-en="Regional Focal Point for Teachers and EdTech. Task Team Leader for Chile and Peru education operations." data-es="Punto Focal Regional para Docentes y EdTech. Lider de Equipo de Tarea para operaciones de educacion en Chile y Peru.">Regional Focal Point for Teachers and EdTech. Task Team Leader for Chile and Peru education operations.</p></div></div>
+            <div class="timeline-item animate-on-scroll"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">Sep 2020 - Aug 2023</div><div class="timeline-title" data-en="Senior Economist, Global Knowledge Unit" data-es="Economista Senior, Unidad de Conocimiento Global">Senior Economist, Global Knowledge Unit</div><div class="timeline-org">Education Global Practice (GEAK) | The World Bank</div><p class="timeline-desc" data-en="Global Lead for Teachers Thematic Group. TTL for Teach and Coach. Scaled Teach to 40+ countries." data-es="Lider Global del Grupo Tematico de Docentes. TTL para Teach y Coach. Escalo Teach a mas de 40 paises.">Global Lead for Teachers Thematic Group. TTL for Teach and Coach. Scaled Teach to 40+ countries.</p></div></div>
+            <div class="timeline-item animate-on-scroll"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">Sep 2017 - Sep 2020</div><div class="timeline-title" data-en="Economist" data-es="Economista">Economist</div><div class="timeline-org">Education Global Practice (GEAK) | The World Bank</div><p class="timeline-desc" data-en="Led Teach development from concept through global deployment. Conceived Coach and raised $7M funding." data-es="Lidero el desarrollo de Teach desde el concepto hasta el despliegue global. Concibio Coach y recaudo $7M en financiamiento.">Led Teach development from concept through global deployment. Conceived Coach and raised $7M funding.</p></div></div>
+            <div class="timeline-item animate-on-scroll"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2015 - 2017</div><div class="timeline-title">Young Professional</div><div class="timeline-org">The World Bank</div><p class="timeline-desc" data-en="Core team member for WDR 2017. Authored chapter on political economy of policy failure." data-es="Miembro del equipo central para el IDM 2017. Autor del capitulo sobre economia politica del fracaso de politicas.">Core team member for WDR 2017. Authored chapter on political economy of policy failure.</p></div></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Academic Background" data-es="Formacion Academica">Academic Background</span>
+            <h2 data-en="Education" data-es="Educacion">Education</h2>
+        </div>
+        <div class="edu-grid">
+            <div class="edu-card animate-on-scroll"><div class="edu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div><div class="edu-degree" data-en="Ph.D. in Political Economy" data-es="Doctorado en Economia Politica">Ph.D. in Political Economy</div><div class="edu-school">Princeton University</div><div class="edu-year">2009 - 2013</div></div></div>
+            <div class="edu-card animate-on-scroll"><div class="edu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div><div class="edu-degree" data-en="Master of Public Policy" data-es="Maestria en Politicas Publicas">Master of Public Policy</div><div class="edu-school">Princeton University</div><div class="edu-year">2009 - 2011</div></div></div>
+            <div class="edu-card animate-on-scroll"><div class="edu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div><div class="edu-degree" data-en="Master in Economics" data-es="Maestria en Economia">Master in Economics</div><div class="edu-school">Universidad Nacional de La Plata</div><div class="edu-year">2005 - 2009</div></div></div>
+            <div class="edu-card animate-on-scroll"><div class="edu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div><div class="edu-degree" data-en="Bachelor of Economics" data-es="Licenciatura en Economia">Bachelor of Economics</div><div class="edu-school">Universidad Nacional de La Plata</div><div class="edu-year">2000 - 2005 | Top 5 GPA</div></div></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Contact" data-es="Contacto">Contact</span>
+            <h2 data-en="Get in Touch" data-es="Contactar">Get in Touch</h2>
+        </div>
+        <div class="contact-grid">
+            <a href="mailto:molina@worldbank.org" class="contact-card animate-on-scroll"><div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="contact-label">Email</div><div class="contact-value">molina@worldbank.org</div></a>
+            <a href="https://www.worldbank.org/en/about/people/e/ezequiel-molina" target="_blank" class="contact-card animate-on-scroll"><div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="contact-label">World Bank</div><div class="contact-value" data-en="Official Profile" data-es="Perfil Oficial">Official Profile</div></a>
+            <a href="https://www.linkedin.com/in/ezequiel-molina-8a636884/" target="_blank" class="contact-card animate-on-scroll"><div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div class="contact-label">LinkedIn</div><div class="contact-value" data-en="Connect" data-es="Conectar">Connect</div></a>
+            <a href="https://twitter.com/Eze_TEACH" target="_blank" class="contact-card animate-on-scroll"><div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></div><div class="contact-label">Twitter/X</div><div class="contact-value">@Eze_TEACH</div></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>2026 Ezequiel Molina</p>
+        <div class="footer-links">
+            <a href="https://blogs.worldbank.org/en/team/e/ezequiel-molina" target="_blank">World Bank Blog</a>
+            <a href="https://scholar.google.com/citations?user=lLupDb8AAAAJ" target="_blank">Google Scholar</a>
+            <a href="https://sites.google.com/site/ezequielmolina/" target="_blank">Personal Site</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+
+        // Scroll effects
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Animate on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Publication tabs
+        const pubTabs = document.querySelectorAll('.pub-tab');
+        const pubContents = document.querySelectorAll('.pub-content');
+        pubTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                pubTabs.forEach(t => t.classList.remove('active'));
+                pubContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // Language switching
+        let currentLang = 'en';
+        const langBtns = document.querySelectorAll('.lang-btn');
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+        });
+    </script>
+</body>
+</html>
