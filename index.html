@@ -54,8 +54,11 @@
         .lang-switch { display: flex; gap: 0.5rem; }
         .lang-btn { padding: 0.4rem 0.8rem; background: transparent; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; }
         .lang-btn.active, .lang-btn:hover { background: var(--accent-1); border-color: var(--accent-1); color: white; }
-        .menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
-        .menu-btn span { width: 25px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+        .menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 10px; margin-left: 0.5rem; z-index: 1001; }
+        .menu-btn span { width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; transform-origin: center; }
+        .menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .menu-btn.active span:nth-child(2) { opacity: 0; }
+        .menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 8rem 4rem 4rem; }
         .hero-content { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .hero-text { animation: fadeInUp 1s ease; }
@@ -167,25 +170,176 @@
         footer a { color: var(--accent-1); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
         .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+        /* Tablet Responsive */
         @media (max-width: 1200px) {
             .programs-grid { grid-template-columns: repeat(2, 1fr); }
             .pub-grid { grid-template-columns: 1fr; }
             .blog-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+        /* Mobile Responsive */
         @media (max-width: 900px) {
-            nav { padding: 1rem 2rem; }
+            nav { padding: 1rem 1.5rem; }
+            .nav-right { gap: 0.5rem; }
             .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10, 10, 15, 0.98); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border-color); }
             .nav-links.active { display: flex; }
+            .nav-links a { font-size: 1.1rem; padding: 0.5rem 0; }
             .menu-btn { display: flex; }
-            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero { padding: 6rem 1.5rem 3rem; min-height: auto; }
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
             h1 { font-size: 2.5rem; }
-            .hero-subtitle { margin: 0 auto 2rem; }
-            .hero-cta { justify-content: center; }
-            section { padding: 4rem 2rem; }
+            .hero-subtitle { margin: 0 auto 2rem; font-size: 1.1rem; }
+            .hero-cta { justify-content: center; flex-direction: column; align-items: center; }
+            .hero-cta .btn { width: 100%; max-width: 280px; justify-content: center; }
+            section { padding: 3rem 1.5rem; }
             .programs-grid, .pub-grid, .edu-grid, .contact-grid, .blog-grid { grid-template-columns: 1fr; }
             .featured-grid { grid-template-columns: 1fr !important; }
             .floating-badge { display: none; }
-            h2 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            .section-header { margin-bottom: 2.5rem; }
+            .section-desc { font-size: 0.95rem; }
+            .hero-card { max-width: 100%; padding: 1.5rem; }
+            .card-stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+            .stat { padding: 0.75rem 0.5rem; }
+            .stat-value { font-size: 1.25rem; }
+            .stat-label { font-size: 0.65rem; }
+            .program-card { padding: 1.5rem; }
+            .program-image { height: 160px; }
+            .program-name { font-size: 1.25rem; }
+            .pub-tabs { gap: 0.5rem; }
+            .pub-tab { padding: 0.6rem 1rem; font-size: 0.8rem; }
+            .pub-card { padding: 1.25rem; }
+            .pub-title { font-size: 0.95rem; }
+            .blog-card .blog-content { padding: 1.25rem; }
+            .blog-title { font-size: 1rem; }
+            .blog-image { height: 140px; }
+            .timeline::before { left: 8px; }
+            .timeline-item { padding-left: 2.5rem; }
+            .timeline-dot { left: 0; }
+            .timeline-content { padding: 1.25rem; }
+            .edu-card { padding: 1.5rem; gap: 1rem; }
+            .edu-icon { width: 50px; height: 50px; }
+            .contact-card { padding: 1.5rem; }
+            .contact-icon { width: 50px; height: 50px; }
+            footer { padding: 2rem 1.5rem; }
+            .footer-links { gap: 1.5rem; }
+            .subsection-header { padding: 1rem; margin-bottom: 1.5rem; }
+            .subsection-header h3 { font-size: 1.25rem; }
+        }
+
+        /* Small Mobile Responsive */
+        @media (max-width: 480px) {
+            nav { padding: 0.75rem 1rem; }
+            .logo { font-size: 1.25rem; }
+            .lang-btn { padding: 0.3rem 0.6rem; font-size: 0.7rem; }
+            .hero { padding: 5rem 1rem 2rem; }
+            h1 { font-size: 2rem; line-height: 1.2; }
+            .hero-subtitle { font-size: 1rem; padding: 0 0.5rem; }
+            .hero-cta .btn { padding: 0.875rem 1.5rem; font-size: 0.9rem; }
+            section { padding: 2.5rem 1rem; }
+            h2 { font-size: 1.5rem; }
+            .section-label { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+            .section-desc { font-size: 0.9rem; }
+            .hero-card { padding: 1.25rem; border-radius: 16px; }
+            .avatar { width: 70px; height: 70px; border-radius: 14px; }
+            .avatar img { border-radius: 14px; }
+            .card-info h3 { font-size: 1.1rem; }
+            .card-info p { font-size: 0.8rem; }
+            .card-stats { gap: 0.35rem; }
+            .stat { padding: 0.6rem 0.25rem; border-radius: 8px; }
+            .stat-value { font-size: 1.1rem; }
+            .stat-label { font-size: 0.6rem; }
+            .program-card { padding: 1.25rem; border-radius: 16px; }
+            .program-image { height: 140px; border-radius: 12px; }
+            .program-name { font-size: 1.15rem; }
+            .program-desc { font-size: 0.9rem; }
+            .program-stats { gap: 1rem; }
+            .program-stat { font-size: 0.85rem; }
+            .pub-tabs { flex-wrap: wrap; justify-content: center; }
+            .pub-tab { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
+            .pub-card { padding: 1rem; border-radius: 14px; }
+            .pub-type { font-size: 0.7rem; padding: 0.25rem 0.6rem; }
+            .pub-title { font-size: 0.9rem; }
+            .pub-authors { font-size: 0.8rem; }
+            .pub-meta { font-size: 0.8rem; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+            .blog-card { border-radius: 14px; }
+            .blog-image { height: 120px; }
+            .blog-content { padding: 1rem; }
+            .blog-tag { font-size: 0.7rem; }
+            .blog-title { font-size: 0.95rem; }
+            .blog-excerpt { font-size: 0.85rem; }
+            .blog-meta { font-size: 0.8rem; }
+            .timeline-item { padding-left: 2rem; padding-bottom: 2rem; }
+            .timeline-content { padding: 1rem; border-radius: 12px; }
+            .timeline-date { font-size: 0.8rem; }
+            .timeline-title { font-size: 1rem; }
+            .timeline-org { font-size: 0.85rem; }
+            .timeline-desc { font-size: 0.85rem; }
+            .edu-card { padding: 1.25rem; border-radius: 14px; flex-direction: column; text-align: center; }
+            .edu-icon { margin: 0 auto; }
+            .edu-degree { font-size: 1rem; }
+            .edu-school { font-size: 0.9rem; }
+            .edu-year { font-size: 0.8rem; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .contact-card { padding: 1rem; border-radius: 14px; }
+            .contact-icon { width: 45px; height: 45px; border-radius: 12px; margin-bottom: 0.75rem; }
+            .contact-icon svg { width: 22px; height: 22px; }
+            .contact-label { font-size: 0.9rem; }
+            .contact-value { font-size: 0.75rem; }
+            footer { padding: 1.5rem 1rem; font-size: 0.8rem; }
+            .footer-links { gap: 1rem; font-size: 0.85rem; }
+            .btn { padding: 0.875rem 1.25rem; font-size: 0.9rem; border-radius: 10px; }
+            .btn-secondary { padding: 0.75rem 1rem; }
+            .subsection-header { padding: 1rem; border-radius: 12px; }
+            .subsection-header h3 { font-size: 1.1rem; flex-wrap: wrap; }
+            .subsection-header h3 svg { width: 22px; height: 22px; }
+            .subsection-header p { font-size: 0.85rem; }
+            /* Stats in hero section */
+            .card-header { flex-direction: column; text-align: center; }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            h1 { font-size: 1.75rem; }
+            .hero-subtitle { font-size: 0.95rem; }
+            .card-stats { grid-template-columns: 1fr; gap: 0.5rem; }
+            .stat { padding: 0.75rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .pub-tabs { flex-direction: column; align-items: stretch; }
+            .pub-tab { text-align: center; }
+        }
+
+        /* Landscape phone optimization */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero { min-height: auto; padding-top: 5rem; }
+            .hero-content { gap: 1.5rem; }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .program-card:hover, .pub-card:hover, .blog-card:hover, .contact-card:hover, .edu-card:hover, .timeline-content:hover {
+                transform: none;
+            }
+            .btn:hover { transform: none; }
+            .program-card:active, .pub-card:active, .blog-card:active, .contact-card:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Fix inline grid styles on mobile */
+        @media (max-width: 900px) {
+            .programs-grid[style*="grid-template-columns: repeat(2"] {
+                grid-template-columns: 1fr !important;
+            }
+            .programs-grid[style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: 1fr !important;
+            }
+            [style*="display: flex"][style*="justify-content: center"][style*="gap: 3rem"] {
+                flex-direction: column;
+                gap: 1.5rem !important;
+                align-items: center;
+            }
         }
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
@@ -606,8 +760,14 @@
         // Mobile menu
         const menuBtn = document.getElementById('menuBtn');
         const navLinks = document.getElementById('navLinks');
-        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuBtn.classList.remove('active');
+        }));
 
         // Scroll effects
         const navbar = document.getElementById('navbar');
