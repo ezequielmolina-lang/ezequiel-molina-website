@@ -189,9 +189,33 @@
         }
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* Accessibility: Skip link */
+        .skip-link:focus { top: 0; }
+
+        /* Accessibility: Focus indicators */
+        a:focus-visible, button:focus-visible, .btn:focus-visible {
+            outline: 2px solid var(--accent-1);
+            outline-offset: 2px;
+        }
+        .program-card:focus-within { border-color: var(--accent-1); box-shadow: var(--glow); }
+
+        /* Accessibility: Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+            .floating-badge { animation: none; }
+            .bg-animation::before { animation: none; }
+            .animate-on-scroll { opacity: 1; transform: none; }
+        }
     </style>
 </head>
 <body>
+    <a href="#programs" class="skip-link" style="position: absolute; top: -50px; left: 0; background: var(--accent-1); color: white; padding: 12px 24px; z-index: 10000; transition: top 0.3s; text-decoration: none; font-weight: 600;" data-en="Skip to main content" data-es="Saltar al contenido principal">Skip to main content</a>
     <div class="bg-animation"></div>
     <div class="grid-pattern"></div>
 
@@ -199,16 +223,16 @@
         <div class="logo">EM</div>
         <div class="nav-right">
             <ul class="nav-links" id="navLinks">
-                <li><a href="#programs" data-en="Programs" data-es="Programas">Programs</a></li>
+                <li><a href="#programs" data-en="Public Goods" data-es="Bienes Publicos">Public Goods</a></li>
                 <li><a href="#publications" data-en="Publications" data-es="Publicaciones">Publications</a></li>
                 <li><a href="#blogs" data-en="Blogs" data-es="Blogs">Blogs</a></li>
                 <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a></li>
                 <li><a href="Ezequiel_Molina_CV.pdf" target="_blank">CV</a></li>
                 <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
             </ul>
-            <div class="lang-switch">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="es">ES</button>
+            <div class="lang-switch" role="group" aria-label="Language selection">
+                <button class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">EN</button>
+                <button class="lang-btn" data-lang="es" aria-label="Cambiar a Espanol" aria-pressed="false">ES</button>
             </div>
         </div>
         <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
@@ -260,68 +284,108 @@
         </div>
     </section>
 
-    <section id="featured" style="padding-top: 2rem;">
-        <div class="featured-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto;">
-            <div class="featured-card animate-on-scroll" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem;">
-                <div style="width: 60px; height: 60px; background: var(--gradient-1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                </div>
-                <div>
-                    <div style="font-size: 0.75rem; color: var(--accent-1); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem;" data-en="2025 Award" data-es="Premio 2025">2025 Award</div>
-                    <div style="font-weight: 600; font-size: 1rem;" data-en="World Bank Presidential Innovation Award" data-es="Premio Presidencial de Innovacion del Banco Mundial">World Bank Presidential Innovation Award</div>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="For 'LearnAI for Jobs' - 1 of 7 selected Bank-wide" data-es="Por 'LearnAI for Jobs' - 1 de 7 seleccionados a nivel del Banco">For "LearnAI for Jobs" - 1 of 7 selected Bank-wide</div>
-                </div>
-            </div>
-            <div class="featured-card animate-on-scroll" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem;">
-                <div style="width: 60px; height: 60px; background: rgba(6, 182, 212, 0.15); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                </div>
-                <div>
-                    <div style="font-size: 0.75rem; color: var(--accent-3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem;" data-en="Weekly Newsletter" data-es="Boletin Semanal">Weekly Newsletter</div>
-                    <div style="font-weight: 600; font-size: 1rem;">AI Tuesday</div>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="Reaching 10,000+ World Bank staff weekly across all regions" data-es="Llegando a mas de 10,000 funcionarios del Banco Mundial semanalmente en todas las regiones">Reaching 10,000+ World Bank staff weekly across all regions</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="mission" style="padding-bottom: 2rem;">
-        <div class="animate-on-scroll" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; position: relative;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="1.5" style="opacity: 0.5; margin-bottom: 1rem;"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-            <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-secondary); font-style: italic;" data-en="Millions of children complete school without learning to read. This isn't the fault of teachers - it's a system failure. My work focuses on giving educators the tools, training, and technology they need to change this." data-es="Millones de ninos completan la escuela sin aprender a leer. Esto no es culpa de los docentes - es una falla del sistema. Mi trabajo se enfoca en dar a los educadores las herramientas, capacitacion y tecnologia que necesitan para cambiar esto.">Millions of children complete school without learning to read. This isn't the fault of teachers - it's a system failure. My work focuses on giving educators the tools, training, and technology they need to change this.</p>
-        </div>
-    </section>
-
     <section id="programs">
         <div class="section-header animate-on-scroll">
-            <span class="section-label" data-en="Programs" data-es="Programas">Programs</span>
-            <h2 data-en="Tools & Initiatives" data-es="Herramientas e Iniciativas">Tools & Initiatives</h2>
-            <p class="section-desc" data-en="Open-source tools and programs developed with World Bank teams to support teacher development and education systems." data-es="Herramientas y programas de codigo abierto desarrollados con equipos del Banco Mundial para apoyar el desarrollo docente y los sistemas educativos.">Open-source tools and programs developed with World Bank teams to support teacher development and education systems.</p>
+            <span class="section-label" data-en="Public Goods" data-es="Bienes Publicos">Public Goods</span>
+            <h2 data-en="Free Tools for Educators & Policymakers" data-es="Herramientas Gratuitas para Educadores y Formuladores de Politicas">Free Tools for Educators & Policymakers</h2>
+            <p class="section-desc" data-en="Download, use, and adapt these open-source tools to improve teaching quality. No registration required." data-es="Descargue, use y adapte estas herramientas de codigo abierto para mejorar la calidad de la ensenanza. Sin registro requerido.">Download, use, and adapt these open-source tools to improve teaching quality. No registration required.</p>
+            <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-1);">53%</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="of children can't read by age 10" data-es="de ninos no pueden leer a los 10 anos">of children can't read by age 10</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-3);">$11T</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="annual cost of learning crisis" data-es="costo anual de la crisis de aprendizaje">annual cost of learning crisis</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-4);">40+</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="countries using these tools" data-es="paises usando estas herramientas">countries using these tools</div>
+                </div>
+            </div>
         </div>
-        <div class="programs-grid">
+
+        <!-- Teachers Subsection -->
+        <div class="subsection-header animate-on-scroll" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%); border-radius: 16px; border-left: 4px solid var(--accent-1);">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span data-en="For Teachers & School Leaders" data-es="Para Docentes y Lideres Escolares">For Teachers & School Leaders</span>
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;" data-en="Tools to measure, improve, and support classroom instruction" data-es="Herramientas para medir, mejorar y apoyar la instruccion en el aula">Tools to measure, improve, and support classroom instruction</p>
+        </div>
+        <div class="programs-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 4rem;">
             <div class="program-card animate-on-scroll">
                 <div class="program-image">
                     <img src="https://worldbank.scene7.com/is/image/worldbankprod/School-and-Students?wid=780&hei=439&fmt=webp" alt="Classroom - Teach program">
                 </div>
                 <h3 class="program-name">Teach</h3>
-                <p class="program-desc" data-en="An open-source classroom observation tool to help measure and improve teaching quality in primary, early childhood, and secondary education." data-es="Una herramienta de observacion de aula de codigo abierto para ayudar a medir y mejorar la calidad de la ensenanza en educacion primaria, inicial y secundaria.">An open-source classroom observation tool to help measure and improve teaching quality in primary, early childhood, and secondary education.</p>
+                <p class="program-desc" data-en="Start measuring teaching quality in your classrooms today. This free, validated observation tool helps you identify what's working and where teachers need support." data-es="Comience a medir la calidad de la ensenanza en sus aulas hoy. Esta herramienta de observacion gratuita y validada le ayuda a identificar que funciona y donde los docentes necesitan apoyo.">Start measuring teaching quality in your classrooms today. This free, validated observation tool helps you identify what's working and where teachers need support.</p>
                 <div class="program-stats">
                     <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg><span data-en="40+ Countries" data-es="40+ Paises">40+ Countries</span></div>
                     <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-en="180K+ Teachers" data-es="180K+ Docentes">180K+ Teachers</span></div>
                 </div>
-                <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" class="program-link"><span data-en="Learn More" data-es="Saber Mas">Learn More</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; margin-bottom: 0.75rem;">
+                    <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); text-decoration: none; transition: all 0.3s ease;">Teach ECE</a>
+                    <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(139, 92, 246, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-2); text-decoration: none; transition: all 0.3s ease;">Teach Primary</a>
+                    <a href="https://www.worldbank.org/en/topic/education/brief/teach-secondary-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(6, 182, 212, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-3); text-decoration: none; transition: all 0.3s ease;">Teach Secondary</a>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto;">
+                    <a href="https://documents1.worldbank.org/curated/en/872291641201520569/pdf/Teach-Primary-Observer-Manual.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--gradient-1); border-radius: 8px; font-size: 0.85rem; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-en="Download Manual" data-es="Descargar Manual">Download Manual</span>
+                    </a>
+                    <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.5rem 1rem; background: transparent; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none;">
+                        <span data-en="Full Documentation" data-es="Documentacion Completa">Full Documentation</span>
+                    </a>
+                </div>
             </div>
             <div class="program-card animate-on-scroll">
                 <div class="program-image">
                     <img src="https://worldbank.scene7.com/is/image/worldbankprod/Pakistan-girl-classroom-breaking-barriers?wid=780&hei=439&fmt=webp" alt="Teacher coaching - Coach program">
                 </div>
                 <h3 class="program-name">Coach</h3>
-                <p class="program-desc" data-en="A framework for improving in-service teacher professional development, incorporating insights from behavioral science and adult learning research." data-es="Un marco para mejorar el desarrollo profesional docente en servicio, incorporando conocimientos de la ciencia del comportamiento y la investigacion sobre aprendizaje adulto.">A framework for improving in-service teacher professional development, incorporating insights from behavioral science and adult learning research.</p>
+                <p class="program-desc" data-en="Transform how you train teachers. This evidence-based framework uses behavioral science to make professional development effective. Includes ready-to-use training materials." data-es="Transforme como capacita a los docentes. Este marco basado en evidencia utiliza la ciencia del comportamiento para que el desarrollo profesional sea efectivo. Incluye materiales listos para usar.">Transform how you train teachers. This evidence-based framework uses behavioral science to make professional development effective. Includes ready-to-use training materials.</p>
                 <div class="program-stats">
                     <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg><span data-en="15+ Countries" data-es="15+ Paises">15+ Countries</span></div>
                     <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>$7M</div>
                 </div>
-                <a href="https://www.worldbank.org/en/topic/education/brief/coach-helping-countries-accelerate-learning-by-improving-in-service-teacher-professional-development" target="_blank" class="program-link"><span data-en="Learn More" data-es="Saber Mas">Learn More</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto;">
+                    <a href="https://thedocs.worldbank.org/en/doc/5b7f39c1822ef0127c8596fe0fb1ced0-0200022022/original/Coach-Tools-and-Resources-20220324.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--gradient-1); border-radius: 8px; font-size: 0.85rem; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-en="Download Guide" data-es="Descargar Guia">Download Guide</span>
+                    </a>
+                    <a href="https://www.worldbank.org/en/topic/teachers/brief/coach-helping-countries-accelerate-learning-by-improving-in-service-teacher-professional-development" target="_blank" style="padding: 0.5rem 1rem; background: transparent; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none;">
+                        <span data-en="Full Documentation" data-es="Documentacion Completa">Full Documentation</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Subsection -->
+        <div class="subsection-header animate-on-scroll" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, transparent 100%); border-radius: 16px; border-left: 4px solid var(--accent-3);">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5A2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5"/></svg>
+                <span data-en="AI for Education" data-es="IA para la Educacion">AI for Education</span>
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;" data-en="Practical resources for integrating AI in schools and classrooms" data-es="Recursos practicos para integrar la IA en escuelas y aulas">Practical resources for integrating AI in schools and classrooms</p>
+        </div>
+        <div class="programs-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=780&h=439&fit=crop" alt="La IA en el Aula - Teachers using AI">
+                </div>
+                <h3 class="program-name" data-en="AI Guidance for Teachers" data-es="Guia de IA para Docentes">AI Guidance for Teachers</h3>
+                <p class="program-desc" data-en="'La IA en el Aula, Aliada Pedagogica' - Practical guidance and resources to help teachers integrate AI effectively in their classrooms. Includes a video of the initiative and a guide in Spanish co-created with teachers in Lima." data-es="'La IA en el Aula, Aliada Pedagogica' - Orientacion practica y recursos para ayudar a los docentes a integrar la IA de manera efectiva en sus aulas. Incluye un video de la iniciativa y una guia en espanol co-creada con docentes en Lima.">'La IA en el Aula, Aliada Pedagogica' - Practical guidance and resources to help teachers integrate AI effectively in their classrooms. Includes a video of the initiative and a guide in Spanish co-created with teachers in Lima.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <a href="https://news.microsoft.com/source/latam/features/ai/world-bank-peru-teachers-copilot/?lang=en" target="_blank" style="padding: 0.5rem 1rem; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 8px; font-size: 0.85rem; color: var(--accent-3); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span data-en="Watch Video" data-es="Ver Video">Watch Video</span>
+                    </a>
+                    <a href="https://documents1.worldbank.org/curated/en/099623210222512099/pdf/IDU-4a732196-e738-4458-9030-995917f3d22e.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--gradient-1); border-radius: 8px; font-size: 0.85rem; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-en="Download the Guide" data-es="Descargar la Guia">Download the Guide</span>
+                    </a>
+                </div>
             </div>
             <div class="program-card animate-on-scroll">
                 <div class="program-image">
@@ -331,9 +395,37 @@
                 <p class="program-desc" data-en="A practical AI training method to help school leaders reduce administrative tasks and dedicate more time to instructional leadership." data-es="Un metodo practico de capacitacion en IA para ayudar a los lideres escolares a reducir tareas administrativas y dedicar mas tiempo al liderazgo pedagogico.">A practical AI training method to help school leaders reduce administrative tasks and dedicate more time to instructional leadership.</p>
                 <div class="program-stats">
                     <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-en="2,000+ Directors" data-es="2,000+ Directores">2,000+ Directors</span></div>
-                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-en="13K+ Downloads" data-es="13K+ Descargas">13K+ Downloads</span></div>
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-en="15K+ Downloads" data-es="15K+ Descargas">15K+ Downloads</span></div>
                 </div>
-                <a href="https://news.microsoft.com/source/latam/features/ai/world-bank-peru-teachers-copilot/?lang=en" target="_blank" class="program-link"><span data-en="Learn More" data-es="Saber Mas">Learn More</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto;">
+                    <a href="https://documents1.worldbank.org/curated/en/099731109172514920/pdf/IDU-86373363-2741-4f78-a1cb-be22662e4459.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--gradient-1); border-radius: 8px; font-size: 0.85rem; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-en="Download the Book" data-es="Descargar el Libro">Download the Book</span>
+                    </a>
+                    <a href="https://www.bancomundial.org/es/programs/educacion-america-latina-caribe/publication/el-director-libre" target="_blank" style="padding: 0.5rem 1rem; background: transparent; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none;">
+                        <span data-en="Learn More" data-es="Saber Mas">Learn More</span>
+                    </a>
+                </div>
+            </div>
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=780&h=439&fit=crop" alt="AI Research Explorer">
+                </div>
+                <h3 class="program-name" data-en="AI Research & Insights Explorer" data-es="Explorador de Investigacion de IA">AI Research & Insights Explorer</h3>
+                <p class="program-desc" data-en="Have questions about AI in education? Ask our AI-powered research assistant. It contains all our briefs, blogs, and studies - get instant answers with citations." data-es="¿Tiene preguntas sobre IA en educacion? Pregunte a nuestro asistente de investigacion impulsado por IA. Contiene todos nuestros informes, blogs y estudios - obtenga respuestas instantaneas con citas.">Have questions about AI in education? Ask our AI-powered research assistant. It contains all our briefs, blogs, and studies - get instant answers with citations.</p>
+                <a href="https://notebooklm.google.com/notebook/30169cc3-fcb3-4f3d-9401-a866540dd12d" target="_blank" class="program-link"><span data-en="Explore Research" data-es="Explorar Investigacion">Explore Research</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=780&h=439&fit=crop" alt="AI Policy Guide - Global">
+                </div>
+                <h3 class="program-name" data-en="AI School Policy Guide" data-es="Guia de Politicas de IA Escolar">AI School Policy Guide</h3>
+                <p class="program-desc" data-en="An AI-powered tool with 30+ policy guidances from countries worldwide. Don't start from scratch - explore what others are doing and adapt best practices for your context." data-es="Una herramienta impulsada por IA con mas de 30 guias de politicas de paises de todo el mundo. No empiece desde cero - explore lo que otros estan haciendo y adapte las mejores practicas a su contexto.">An AI-powered tool with 30+ policy guidances from countries worldwide. Don't start from scratch - explore what others are doing and adapt best practices for your context.</p>
+                <div class="program-stats">
+                    <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span data-en="30+ Countries" data-es="30+ Paises">30+ Countries</span></div>
+                </div>
+                <div style="display: inline-block; padding: 0.35rem 0.75rem; background: rgba(255, 193, 7, 0.15); border-radius: 50px; font-size: 0.75rem; color: #ffc107; margin-bottom: 0.5rem;" data-en="Currently Updating" data-es="En Actualizacion">Currently Updating</div>
+                <a href="https://notebooklm.google.com/notebook/41387419-71da-4c45-9736-64b7f3b52163" target="_blank" class="program-link"><span data-en="Explore Policies" data-es="Explorar Politicas">Explore Policies</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
         </div>
     </section>
@@ -443,7 +535,52 @@
         </div>
     </section>
 
-    <section id="contact">
+    <section id="featured" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="section-header animate-on-scroll">
+            <span class="section-label" data-en="Current Projects" data-es="Proyectos Actuales">Current Projects</span>
+            <h2 data-en="Engage with Current Projects" data-es="Participa en Proyectos Actuales">Engage with Current Projects</h2>
+        </div>
+        <div class="programs-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="program-card animate-on-scroll" style="border-color: rgba(99, 102, 241, 0.3); background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-card) 100%);">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=780&h=439&fit=crop" alt="Secondary students in Lima">
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                    <span style="font-size: 0.75rem; color: var(--accent-1); text-transform: uppercase; letter-spacing: 1px;" data-en="2025 Innovation Award" data-es="Premio Innovacion 2025">2025 Innovation Award</span>
+                </div>
+                <h3 class="program-name" style="font-size: 1.25rem;">LearnAI for Jobs</h3>
+                <p class="program-desc" data-en="Piloting AI tutoring and career coaching for 5th grade secondary students in Lima, Peru. Working with DRELM to help students develop skills for the future economy. One of only 7 projects selected Bank-wide." data-es="Piloteando tutoria de IA y orientacion vocacional para estudiantes de 5to de secundaria en Lima, Peru. Trabajando con la DRELM para ayudar a los estudiantes a desarrollar habilidades para la economia del futuro. Uno de solo 7 proyectos seleccionados a nivel del Banco.">Piloting AI tutoring and career coaching for 5th grade secondary students in Lima, Peru. Working with DRELM to help students develop skills for the future economy. One of only 7 projects selected Bank-wide.</p>
+                <a href="#contact" class="program-link"><span data-en="Learn more" data-es="Saber mas">Learn more</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=780&h=439&fit=crop" alt="School directors evaluation">
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-4)" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    <span style="font-size: 0.75rem; color: var(--accent-4); text-transform: uppercase; letter-spacing: 1px;" data-en="Evaluation" data-es="Evaluacion">Evaluation</span>
+                </div>
+                <h3 class="program-name" style="font-size: 1.25rem;" data-en="Evaluating El Director LIBRE" data-es="Evaluando El Director LIBRE">Evaluating El Director LIBRE</h3>
+                <p class="program-desc" data-en="Conducting a rigorous evaluation of El Director LIBRE's impact on school leadership practices. Measuring how AI training helps directors reduce administrative burden and improve instructional leadership." data-es="Realizando una evaluacion rigurosa del impacto de El Director LIBRE en las practicas de liderazgo escolar. Midiendo como la capacitacion en IA ayuda a los directores a reducir la carga administrativa y mejorar el liderazgo pedagogico.">Conducting a rigorous evaluation of El Director LIBRE's impact on school leadership practices. Measuring how AI training helps directors reduce administrative burden and improve instructional leadership.</p>
+                <a href="https://www.bancomundial.org/es/programs/educacion-america-latina-caribe/publication/el-director-libre" target="_blank" class="program-link"><span data-en="About El Director LIBRE" data-es="Sobre El Director LIBRE">About El Director LIBRE</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="program-card animate-on-scroll">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=780&h=439&fit=crop" alt="AI Tuesday Newsletter">
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span style="font-size: 0.75rem; color: var(--accent-3); text-transform: uppercase; letter-spacing: 1px;" data-en="Weekly Newsletter" data-es="Boletin Semanal">Weekly Newsletter</span>
+                </div>
+                <h3 class="program-name" style="font-size: 1.25rem;">AI Tuesday</h3>
+                <p class="program-desc" data-en="A weekly newsletter for World Bank staff on practical ways to use AI in their work. Tips, tools, and real examples to boost productivity. Reaching 10,000+ staff across all regions." data-es="Un boletin semanal para el personal del Banco Mundial sobre formas practicas de usar IA en su trabajo. Consejos, herramientas y ejemplos reales. Llegando a mas de 10,000 funcionarios en todas las regiones.">A weekly newsletter for World Bank staff on practical ways to use AI in their work. Tips, tools, and real examples to boost productivity. Reaching 10,000+ staff across all regions.</p>
+                <a href="https://forms.office.com/pages/responsepage.aspx?id=wP6iMWsmZ0y1bieW2PWcNj9cwX1RO45Olsisg0DYiBRUOFNOSVRVTjJJSk5QWERBOFRZMUpLQjhORC4u&origin=lprLink&route=shorturl" target="_blank" class="program-link"><span data-en="WB Employee? Subscribe" data-es="Empleado del BM? Suscribete">WB Employee? Subscribe</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="padding-top: 3rem;">
         <div class="section-header animate-on-scroll">
             <span class="section-label" data-en="Contact" data-es="Contacto">Contact</span>
             <h2 data-en="Get in Touch" data-es="Contactar">Get in Touch</h2>
@@ -509,7 +646,11 @@
 
         function switchLanguage(lang) {
             currentLang = lang;
-            langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            langBtns.forEach(btn => {
+                const isActive = btn.dataset.lang === lang;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive);
+            });
             document.querySelectorAll('[data-' + lang + ']').forEach(el => {
                 const text = el.getAttribute('data-' + lang);
                 if (text) {
