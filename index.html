@@ -10,18 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --accent-1: #6366f1;
-            --accent-2: #8b5cf6;
-            --accent-3: #06b6d4;
+            --bg-primary: #F5F1E6;
+            --bg-secondary: #EDE7D8;
+            --bg-card: #FBF9F2;
+            --text-primary: #233240;
+            --text-secondary: #6C6557;
+            --accent-1: #A66E1F;
+            --accent-2: #6A8F3C;
+            --accent-3: #1F3A56;
             --accent-4: #10b981;
-            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --glow: 0 0 60px rgba(99, 102, 241, 0.3);
+            --gradient-1: linear-gradient(135deg, #233240 0%, #233240 55%, #A66E1F 100%);
+            --border-color: #D8D2C0;
+            --glow: 0 10px 30px rgba(35, 50, 64, 0.08);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -29,24 +29,24 @@
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
         .bg-animation::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, rgba(166, 110, 31, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(106, 143, 60, 0.10) 0%, transparent 50%);
             animation: bgMove 20s ease-in-out infinite;
         }
         @keyframes bgMove { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(2%, 2%); } }
         .grid-pattern {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(35,50,64,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(35,50,64,0.04) 1px, transparent 1px);
             background-size: 60px 60px;
         }
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center;
-            backdrop-filter: blur(20px); background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px); background: rgba(245, 241, 230, 0.92);
             border-bottom: 1px solid var(--border-color); transition: all 0.3s ease;
         }
-        nav.scrolled { padding: 1rem 4rem; background: rgba(10, 10, 15, 0.95); }
-        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        nav.scrolled { padding: 1rem 4rem; background: rgba(245, 241, 230, 0.97); }
+        .logo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-right { display: flex; align-items: center; gap: 2rem; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; }
@@ -63,26 +63,26 @@
         .hero-content { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .hero-text { animation: fadeInUp 1s ease; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        h1 { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+        h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
         h1 .gradient-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .hero-subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; }
         .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
         .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
-        .btn-primary { background: var(--gradient-1); color: white; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5); }
+        .btn-primary { background: var(--gradient-1); color: white; box-shadow: 0 4px 20px rgba(166, 110, 31, 0.4); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(166, 110, 31, 0.5); }
         .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-1); }
+        .btn-secondary:hover { background: rgba(35,50,64,0.10); border-color: var(--accent-1); }
         .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; animation: fadeInUp 1s ease 0.3s both; }
         .hero-card { width: 100%; max-width: 450px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 2rem; backdrop-filter: blur(20px); position: relative; overflow: hidden; }
         .hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-1); }
         .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .avatar { width: 100px; height: 100px; border-radius: 20px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: white; overflow: hidden; position: relative; }
+        .avatar { width: 100px; height: 100px; border-radius: 20px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; font-weight: 700; color: white; overflow: hidden; position: relative; }
         .avatar img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
         .card-info h3 { font-size: 1.25rem; font-weight: 600; }
         .card-info p { color: var(--text-secondary); font-size: 0.9rem; }
         .card-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
-        .stat { text-align: center; padding: 1rem; background: rgba(255, 255, 255, 0.02); border-radius: 12px; border: 1px solid var(--border-color); }
-        .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat { text-align: center; padding: 1rem; background: rgba(35,50,64,0.04); border-radius: 12px; border: 1px solid var(--border-color); }
+        .stat-value { font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .stat-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem; }
         .floating-badge { position: absolute; padding: 0.75rem 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; animation: float 3s ease-in-out infinite; backdrop-filter: blur(10px); }
         .floating-badge.top-right { top: -20px; right: -30px; }
@@ -90,8 +90,8 @@
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         section { padding: 6rem 4rem; max-width: 1400px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-label { display: inline-block; padding: 0.5rem 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.85rem; color: var(--accent-1); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .section-label { display: inline-block; padding: 0.5rem 1rem; background: rgba(166, 110, 31, 0.10); border-radius: 50px; font-size: 0.85rem; color: var(--accent-1); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
         .section-desc { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
         .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         .program-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden; }
@@ -101,7 +101,7 @@
         .program-image { width: 100%; height: 180px; border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem; position: relative; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
         .program-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
         .program-card:hover .program-image img { transform: scale(1.05); }
-        .program-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .program-name { font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
         .program-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
         .program-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
         .program-stat { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
@@ -110,7 +110,7 @@
         .program-link:hover { color: var(--accent-2); gap: 0.75rem; }
         .pub-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .pub-tab { padding: 0.75rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; }
-        .pub-tab:hover, .pub-tab.active { background: rgba(99, 102, 241, 0.1); border-color: var(--accent-1); color: var(--accent-1); }
+        .pub-tab:hover, .pub-tab.active { background: rgba(166, 110, 31, 0.10); border-color: var(--accent-1); color: var(--accent-1); }
         .pub-tab.active { background: var(--accent-1); color: white; }
         .pub-content { display: none; }
         .pub-content.active { display: block; }
@@ -118,9 +118,9 @@
         .pub-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; transition: all 0.3s ease; display: flex; flex-direction: column; }
         .pub-card:hover { transform: translateY(-5px); border-color: var(--accent-1); box-shadow: var(--glow); }
         .pub-card a.pub-link-wrap { color: inherit; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
-        .pub-type { display: inline-block; padding: 0.35rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); margin-bottom: 1rem; width: fit-content; }
+        .pub-type { display: inline-block; padding: 0.35rem 0.75rem; background: rgba(166, 110, 31, 0.10); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); margin-bottom: 1rem; width: fit-content; }
         .pub-type.ai { background: rgba(6, 182, 212, 0.1); color: var(--accent-3); }
-        .pub-type.journal { background: rgba(139, 92, 246, 0.1); color: var(--accent-2); }
+        .pub-type.journal { background: rgba(106, 143, 60, 0.10); color: var(--accent-2); }
         .pub-type.flagship { background: rgba(16, 185, 129, 0.1); color: var(--accent-4); }
         .pub-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; flex-grow: 1; line-height: 1.4; }
         .pub-authors { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
@@ -133,7 +133,7 @@
         .blog-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
         .blog-card:hover .blog-image img { transform: scale(1.05); }
         .blog-content { padding: 1.5rem; }
-        .blog-tag { display: inline-block; padding: 0.35rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); margin-bottom: 0.75rem; }
+        .blog-tag { display: inline-block; padding: 0.35rem 0.75rem; background: rgba(166, 110, 31, 0.10); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); margin-bottom: 0.75rem; }
         .blog-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.4; }
         .blog-excerpt { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
         .blog-meta { display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.85rem; }
@@ -142,7 +142,7 @@
         .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gradient-1); }
         .timeline-item { position: relative; padding-left: 3rem; padding-bottom: 3rem; }
         .timeline-item:last-child { padding-bottom: 0; }
-        .timeline-dot { position: absolute; left: -8px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-primary); border: 3px solid var(--accent-1); box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+        .timeline-dot { position: absolute; left: -8px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-primary); border: 3px solid var(--accent-1); box-shadow: 0 0 20px rgba(166, 110, 31, 0.5); }
         .timeline-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; }
         .timeline-content:hover { border-color: var(--accent-1); transform: translateX(10px); }
         .timeline-date { font-size: 0.85rem; color: var(--accent-1); margin-bottom: 0.5rem; }
@@ -152,7 +152,7 @@
         .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
         .edu-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; display: flex; gap: 1.5rem; transition: all 0.3s ease; }
         .edu-card:hover { border-color: var(--accent-1); transform: translateX(10px); }
-        .edu-icon { width: 60px; height: 60px; background: rgba(99, 102, 241, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .edu-icon { width: 60px; height: 60px; background: rgba(166, 110, 31, 0.10); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .edu-icon svg { width: 28px; height: 28px; stroke: var(--accent-1); }
         .edu-degree { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem; }
         .edu-school { color: var(--accent-1); font-size: 0.95rem; margin-bottom: 0.25rem; }
@@ -160,7 +160,7 @@
         .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
         .contact-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.3s ease; text-decoration: none; color: inherit; }
         .contact-card:hover { transform: translateY(-8px); border-color: var(--accent-1); box-shadow: var(--glow); }
-        .contact-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .contact-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background: rgba(166, 110, 31, 0.10); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
         .contact-card:hover .contact-icon { background: var(--gradient-1); }
         .contact-icon svg { width: 28px; height: 28px; stroke: var(--accent-1); transition: all 0.3s ease; }
         .contact-card:hover .contact-icon svg { stroke: white; }
@@ -182,7 +182,7 @@
         @media (max-width: 900px) {
             nav { padding: 1rem 1.5rem; }
             .nav-right { gap: 0.5rem; }
-            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10, 10, 15, 0.98); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border-color); }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(245, 241, 230, 0.98); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border-color); }
             .nav-links.active { display: flex; }
             .nav-links a { font-size: 1.1rem; padding: 0.5rem 0; }
             .menu-btn { display: flex; }
@@ -445,23 +445,23 @@
             <p class="section-desc" data-en="Download, use, and adapt these open-source tools to improve teaching quality. No registration required." data-es="Descargue, use y adapte estas herramientas de codigo abierto para mejorar la calidad de la ensenanza. Sin registro requerido.">Download, use, and adapt these open-source tools to improve teaching quality. No registration required.</p>
             <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap;">
                 <div style="text-align: center;">
-                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-1);">53%</div>
+                    <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; font-weight: 700; color: var(--accent-1);">53%</div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="of children can't read by age 10" data-es="de ninos no pueden leer a los 10 anos">of children can't read by age 10</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-3);">$11T</div>
+                    <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; font-weight: 700; color: var(--accent-3);">$11T</div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="annual cost of learning crisis" data-es="costo anual de la crisis de aprendizaje">annual cost of learning crisis</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-4);">40+</div>
+                    <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; font-weight: 700; color: var(--accent-4);">40+</div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary);" data-en="countries using these tools" data-es="paises usando estas herramientas">countries using these tools</div>
                 </div>
             </div>
         </div>
 
         <!-- Teachers Subsection -->
-        <div class="subsection-header animate-on-scroll" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%); border-radius: 16px; border-left: 4px solid var(--accent-1);">
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <div class="subsection-header animate-on-scroll" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(166, 110, 31, 0.08) 0%, transparent 100%); border-radius: 16px; border-left: 4px solid var(--accent-1);">
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 <span data-en="For Teachers & School Leaders" data-es="Para Docentes y Lideres Escolares">For Teachers & School Leaders</span>
             </h3>
@@ -479,8 +479,8 @@
                     <div class="program-stat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-en="180K+ Teachers" data-es="180K+ Docentes">180K+ Teachers</span></div>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; margin-bottom: 0.75rem;">
-                    <a href="https://www.worldbank.org/en/topic/teachers/brief/teach-ece-helping-countries-track-and-improve-teaching-quality-in-early-childhood-education" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); text-decoration: none; transition: all 0.3s ease;">Teach ECE</a>
-                    <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(139, 92, 246, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-2); text-decoration: none; transition: all 0.3s ease;">Teach Primary</a>
+                    <a href="https://www.worldbank.org/en/topic/teachers/brief/teach-ece-helping-countries-track-and-improve-teaching-quality-in-early-childhood-education" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(166, 110, 31, 0.10); border-radius: 50px; font-size: 0.75rem; color: var(--accent-1); text-decoration: none; transition: all 0.3s ease;">Teach ECE</a>
+                    <a href="https://www.worldbank.org/en/topic/education/brief/teach-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(106, 143, 60, 0.10); border-radius: 50px; font-size: 0.75rem; color: var(--accent-2); text-decoration: none; transition: all 0.3s ease;">Teach Primary</a>
                     <a href="https://www.worldbank.org/en/topic/education/brief/teach-secondary-helping-countries-track-and-improve-teaching-quality" target="_blank" style="padding: 0.25rem 0.75rem; background: rgba(6, 182, 212, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--accent-3); text-decoration: none; transition: all 0.3s ease;">Teach Secondary</a>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto;">
@@ -516,8 +516,8 @@
         </div>
 
         <!-- AI Subsection -->
-        <div class="subsection-header animate-on-scroll" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, transparent 100%); border-radius: 16px; border-left: 4px solid var(--accent-3);">
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <div class="subsection-header animate-on-scroll" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(106, 143, 60, 0.08) 0%, transparent 100%); border-radius: 16px; border-left: 4px solid var(--accent-3);">
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5A2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5"/></svg>
                 <span data-en="AI for Education" data-es="IA para la Educacion">AI for Education</span>
             </h3>
@@ -649,6 +649,15 @@
             <p class="section-desc" data-en="Selected posts from the World Bank Education Blog." data-es="Publicaciones seleccionadas del Blog de Educacion del Banco Mundial.">Selected posts from the World Bank Education Blog.</p>
         </div>
         <div class="blog-grid">
+            <a href="https://blogs.worldbank.org/en/latinamerica/binding-constraint-on-ai-in-education-latin-america" target="_blank" class="blog-card animate-on-scroll">
+                <div class="blog-image"><img src="https://s7d1.scene7.com/is/image/wbcollab/AI-learning?qlt=90&fmt=webp&resMode=sharp2" alt="AI and Learning"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">AI</span>
+                    <h4 class="blog-title" data-en="The binding constraint on AI in education is not technology. It's organizational culture" data-es="La restriccion principal de la IA en educacion no es la tecnologia. Es la cultura organizacional">The binding constraint on AI in education is not technology. It's organizational culture</h4>
+                    <p class="blog-excerpt" data-en="Exploring the critical distinction between performance and learning in the age of AI." data-es="Explorando la distincion critica entre desempeno y aprendizaje en la era de la IA.">Exploring the critical distinction between performance and learning in the age of AI.</p>
+                    <div class="blog-meta"><span>Nov 2025</span><span data-en="Read More" data-es="Leer Mas">Read More</span></div>
+                </div>
+            </a>
             <a href="https://blogs.worldbank.org/en/education/is-ai-making-us-smarter-or-just-making-us-look-smart-" target="_blank" class="blog-card animate-on-scroll">
                 <div class="blog-image"><img src="https://s7d1.scene7.com/is/image/wbcollab/AI-learning?qlt=90&fmt=webp&resMode=sharp2" alt="AI and Learning"></div>
                 <div class="blog-content">
@@ -717,7 +726,7 @@
             <h2 data-en="Engage with Current Projects" data-es="Participa en Proyectos Actuales">Engage with Current Projects</h2>
         </div>
         <div class="programs-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="program-card animate-on-scroll" style="border-color: rgba(99, 102, 241, 0.3); background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-card) 100%);">
+            <div class="program-card animate-on-scroll" style="border-color: rgba(166, 110, 31, 0.25); background: linear-gradient(135deg, rgba(166, 110, 31, 0.08) 0%, var(--bg-card) 100%);">
                 <div class="program-image">
                     <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=780&h=439&fit=crop" alt="Secondary students in Lima">
                 </div>
@@ -726,7 +735,7 @@
                     <span style="font-size: 0.75rem; color: var(--accent-1); text-transform: uppercase; letter-spacing: 1px;" data-en="2025 Innovation Award" data-es="Premio Innovacion 2025">2025 Innovation Award</span>
                 </div>
                 <h3 class="program-name" style="font-size: 1.25rem;">LearnAI for Jobs</h3>
-                <p class="program-desc" data-en="Piloting AI tutoring and career coaching for 5th grade secondary students in Lima, Peru. Working with DRELM to help students develop skills for the future economy. One of only 7 projects selected Bank-wide." data-es="Piloteando tutoria de IA y orientacion vocacional para estudiantes de 5to de secundaria en Lima, Peru. Trabajando con la DRELM para ayudar a los estudiantes a desarrollar habilidades para la economia del futuro. Uno de solo 7 proyectos seleccionados a nivel del Banco.">Piloting AI tutoring and career coaching for 5th grade secondary students in Lima, Peru. Working with DRELM to help students develop skills for the future economy. One of only 7 projects selected Bank-wide.</p>
+                <p class="program-desc" data-en="AI math tutors running in ~70 public schools and the Eligiendo mi Camino career coach under evaluation across 110 schools in Lima, including Gallito, a distilled small language model that runs fully offline for schools without connectivity." data-es="Piloteando tutoria de IA y orientacion vocacional para estudiantes de 5to de secundaria en Lima, Peru. Trabajando con la DRELM para ayudar a los estudiantes a desarrollar habilidades para la economia del futuro. Uno de solo 7 proyectos seleccionados a nivel del Banco.">Piloting AI tutoring and career coaching for 5th grade secondary students in Lima, Peru. Working with DRELM to help students develop skills for the future economy. One of only 7 projects selected Bank-wide.</p>
                 <a href="#contact" class="program-link"><span data-en="Learn more" data-es="Saber mas">Learn more</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <div class="program-card animate-on-scroll">
@@ -738,7 +747,7 @@
                     <span style="font-size: 0.75rem; color: var(--accent-4); text-transform: uppercase; letter-spacing: 1px;" data-en="Evaluation" data-es="Evaluacion">Evaluation</span>
                 </div>
                 <h3 class="program-name" style="font-size: 1.25rem;" data-en="Evaluating El Director LIBRE" data-es="Evaluando El Director LIBRE">Evaluating El Director LIBRE</h3>
-                <p class="program-desc" data-en="Conducting a rigorous evaluation of El Director LIBRE's impact on school leadership practices. Measuring how AI training helps directors reduce administrative burden and improve instructional leadership." data-es="Realizando una evaluacion rigurosa del impacto de El Director LIBRE en las practicas de liderazgo escolar. Midiendo como la capacitacion en IA ayuda a los directores a reducir la carga administrativa y mejorar el liderazgo pedagogico.">Conducting a rigorous evaluation of El Director LIBRE's impact on school leadership practices. Measuring how AI training helps directors reduce administrative burden and improve instructional leadership.</p>
+                <p class="program-desc" data-en="RCT with 1,270 teachers in Peru showing sustained AI adoption 9 months after training. Now embedded in El Salvador's $500M education transformation with a disbursement-linked indicator, and being adapted for Brazil." data-es="RCT con 1.270 docentes en Peru que muestra adopcion sostenida de IA 9 meses despues de la capacitacion. Ahora integrado en la transformacion educativa de $500M de El Salvador con un indicador vinculado a desembolsos, y en adaptacion para Brasil.">Conducting a rigorous evaluation of El Director LIBRE's impact on school leadership practices. Measuring how AI training helps directors reduce administrative burden and improve instructional leadership.</p>
                 <a href="https://www.bancomundial.org/es/programs/educacion-america-latina-caribe/publication/el-director-libre" target="_blank" class="program-link"><span data-en="About El Director LIBRE" data-es="Sobre El Director LIBRE">About El Director LIBRE</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <div class="program-card animate-on-scroll">
